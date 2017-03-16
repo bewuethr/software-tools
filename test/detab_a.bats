@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 setup () {
-    PATH=$PATH:"$HOME"/dev/software_tools/bin
+    PATH=$PATH:$PWD/bin
     declare -r maxline=16000
 }
 

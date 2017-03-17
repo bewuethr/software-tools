@@ -1,4 +1,4 @@
-{ complete detab }
+{ complete detab, without tabstops and settabs }
 program detabprog (input, output);
 const
     ENDFILE = -1;
@@ -36,6 +36,7 @@ begin
         write(chr(c))
 end;
 
+
 { detab -- convert tabs to equivalent number of blanks }
 procedure detab;
 const
@@ -44,6 +45,16 @@ const
 var
     c : character;
     col : integer;
+
+{ tabpos -- return true if col is a tab stop }
+function tabpos (col : integer) : boolean;
+begin
+    if (col > MAXLINE) then
+        tabpos := true
+    else
+        tabpos := (col mod TABSPACE = 1)
+end;
+
 begin
     col := 1;
     while (getc(c) <> ENDFILE) do
@@ -51,7 +62,7 @@ begin
             repeat
                 putc(BLANK);
                 col := col + 1
-            until (col mod TABSPACE = 1)
+            until (tabpos(col))
         else if (c = NEWLINE) then begin
             putc(NEWLINE);
             col := 1

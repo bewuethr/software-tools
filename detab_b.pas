@@ -82,7 +82,7 @@ begin
         i := i + 1;
         tabcol := tabcol + TABSPACE
     end;
-    tabstops[i+1] := 0
+    tabstops[i] := 0
 end;
 
 begin

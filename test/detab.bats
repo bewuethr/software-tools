@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 setup () {
-    PATH=$PATH:$PWD/bin
+    PATH=$PATH:"$(readlink -f "$BATS_TEST_DIRNAME/../bin")"
     declare -r maxline=16000
 }
 

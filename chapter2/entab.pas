@@ -72,11 +72,20 @@ begin
     col := 1;
     repeat
         newcol := col;
-        while (getc(c) = BLANK) do begin    { collect blanks }
-            newcol := newcol + 1;
-            if (tabpos(newcol, tabstops)) then begin
+        while (getc(c) >= 0) and ((c = BLANK) or (c = TAB)) do begin    { collect blanks }
+            if (c = TAB) then begin
+                repeat
+                    newcol := newcol + 1
+                until (tabpos(newcol, tabstops));
                 putc(TAB);
                 col := newcol
+            end
+            else begin
+                newcol := newcol + 1;
+                if (tabpos(newcol, tabstops)) then begin
+                    putc(TAB);
+                    col := newcol
+                end
             end
         end;
         while (col < newcol) do begin
@@ -88,7 +97,7 @@ begin
             if (c = NEWLINE) then
                 col := 1
             else
-                col  := col + 1
+                col := col + 1
         end
     until (c = ENDFILE)
 end;

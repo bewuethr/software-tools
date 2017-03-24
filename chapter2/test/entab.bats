@@ -106,3 +106,43 @@ teardown () {
     (( status == 0 ))
     [[ $output == $'\tcol\t1\t2\t34\trest' ]]
 }
+
+@test "Tab space space space x" {
+    run entab <<< $'\t   x'
+    declare -p output
+    cat -A <<< "$output"
+    (( status == 0 ))
+    [[ $output == $'\t   x' ]]
+}
+
+@test "Space space space tab x" {
+    run entab <<< $'   \tx'
+    declare -p output
+    cat -A <<< "$output"
+    (( status == 0 ))
+    [[ $output == $'\tx' ]]
+}
+
+@test "Space tab space x tab x" {
+    run entab <<< $' \t x\tx'
+    declare -p output
+    cat -A <<< "$output"
+    (( status == 0 ))
+    [[ $output == $'\t x\tx' ]]
+}
+
+@test "Tab tab tab" {
+    run entab <<< $'\t\t\t'
+    declare -p output
+    cat -A <<< "$output"
+    (( status == 0 ))
+    [[ $output == $'\t\t\t' ]]
+}
+
+@test "Tab backspace x" {
+    run entab <<< $'\t\bx'
+    declare -p output
+    cat -A <<< "$output"
+    (( status == 0 ))
+    [[ $output == $'\t\bx' ]]
+}

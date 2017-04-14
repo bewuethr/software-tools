@@ -36,15 +36,6 @@ begin
         write(chr(c))
 end;
 
-{ max -- compute maximum of two integers }
-function max (x, y : integer) : integer;
-begin
-    if (x > y) then
-        max := x
-    else
-        max := y
-end;
-
 { overstrike -- convert backspaces into multiple lines }
 procedure overstrike;
 const

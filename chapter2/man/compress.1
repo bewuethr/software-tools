@@ -1,0 +1,51 @@
+.\" ============================================================================
+.TH COMPRESS 1
+.\" ============================================================================
+.SH NAME
+compress \(em compress input by encoding repeated characters
+.\" ============================================================================
+.SH SYNOPSIS
+.B compress
+.\" ============================================================================
+.SH DESCRIPTION
+.B compress
+copies its input to its output, replacing strings of four or more identical
+characters by a code sequence so that the output generally contains fewer
+characters than the input.
+A run of
+.BR x 's
+is encoded as
+.BR -nx ,
+where the count
+.B n
+is a character:
+.RB \(aq A \(aq
+calls for a repetition of one
+.BR x ,
+.RB \(aq B \(aq
+a repetition of two
+.BR x 's,
+and so on.
+Runs longer than 26 are broken into several shorter ones.
+Runs of
+.BR ~ 's
+of any length are encoded.
+.\" ============================================================================
+.SH BUGS
+The implementation assumes 26 legal characters beginning with
+.BR A .
+.\" ============================================================================
+.SH EXAMPLE
+.RS 4
+.nf
+.B compress
+.B
+Item    Name         Value
+Item~D Name~I Value
+.B
+1       car          ~$7,000.00
+1~G car~J ~A~$7,000.00
+.B <ENDFILE>
+.fi
+.RE
+.\" ============================================================================

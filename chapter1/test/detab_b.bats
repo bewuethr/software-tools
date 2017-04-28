@@ -5,10 +5,6 @@ setup () {
     declare -r maxline=16000
 }
 
-teardown () {
-    PATH=${PATH%:*}
-}
-
 @test "Single tab" {
     run detab_b <<< $'\tx'
     declare -p output

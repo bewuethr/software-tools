@@ -4,10 +4,6 @@ setup () {
     PATH=$PATH:"$(readlink -f "$BATS_TEST_DIRNAME/../bin")"
 }
 
-teardown () {
-    PATH=${PATH%:*}
-}
-
 @test "Underline xxx" {
     run overstrike_d <<< $'xxx\b\b\b___'
     declare -p output

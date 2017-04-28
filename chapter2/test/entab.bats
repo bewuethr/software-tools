@@ -5,10 +5,6 @@ setup () {
     declare -r maxline=16000
 }
 
-teardown () {
-    PATH=${PATH%:*}
-}
-
 @test "Two characters" {
     run entab <<< 'xx'
     declare -p output

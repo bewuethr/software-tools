@@ -70,7 +70,7 @@ begin
     countcommon := ctr
 end;
 
-{ putline -- print counter(s) for common prefix and rest of line }
+{ putline -- print counter for common prefix and rest of line }
 procedure putline (N : integer; s : string);
 const
     MAXREP = 94;
@@ -78,13 +78,8 @@ var
     offset : integer;
 begin
     offset := 1;
-    while (N >= 0) do begin
-        putc(min(N, MAXREP) + ord(' '));
-        offset := offset + min(N, MAXREP);
-        N := N - min(N, MAXREP);
-        if (N = 0) then
-            break;
-    end;
+    putc(min(N, MAXREP) + ord(' '));
+    offset := offset + min(N, MAXREP);
     writeln(copy(s, offset, length(s) - offset + 1))
 end;
 

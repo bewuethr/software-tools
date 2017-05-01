@@ -1,0 +1,38 @@
+.\" ============================================================================
+.TH EXPAND 1
+.\" ============================================================================
+.SH NAME
+expand \(em expand compressed input
+.\" ============================================================================
+.SH SYNOPSIS
+.B expand
+.\" ============================================================================
+.SH DESCRIPTION
+.B expand
+copies its input, which has presumably been encoded by
+.BR compress (1),
+to its output, replacing code sequences
+.BI -n c
+by the repeated characters they stand for so that the text output exactly
+matches that which was originally encoded.
+The occurrence of the warning character
+.B ~
+in the input means that the next character is a repetition count;
+.RB \(aq A \(aq
+calls for one instance of the following character,
+.RB \(aq B \(aq
+for two, and so on up to
+.RB \(aq Z \(aq.
+.\" ============================================================================
+.SH EXAMPLE
+.RS 4
+.nf
+.B expand
+.B Item~D Name~I Value
+Item    Name         Value
+.B 1~G car~J ~A~$7,000.00
+1       car          ~$7,000.00
+.B <ENDFILE>
+.fi
+.RE
+.\" ============================================================================

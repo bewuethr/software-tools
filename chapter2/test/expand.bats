@@ -24,3 +24,26 @@ setup () {
     (( status == 0 ))
     [[ $output == $'Item    Name         Value\n1       car          ~$7,000.00' ]]
 }
+
+@test "Ends in warning sign" {
+    run expand <<< 'A~'
+    declare -p output
+    (( status == 0 ))
+    [[ $output == 'A~' ]]
+}
+
+@test "Warning sign followed by character other than uppercase letter" {
+    run expand <<< '~9A'
+    declare -p output
+    (( status == 0 ))
+    [[ $output == '~9A' ]]
+}
+
+@test "Input ends after counter" {
+    # Needs need shell because of pipe
+    # Needs pipe to prevent newline from being added
+    run bash -c "printf '~D' | expand"
+    declare -p output
+    (( status == 0 ))
+    [[ $output == '~D' ]]
+}

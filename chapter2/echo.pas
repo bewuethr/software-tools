@@ -31,8 +31,7 @@ begin
 end;
 
 { getarg -- copy n-th command line argument into s }
-{   uses the function argv(i, s), which returns the 0th }
-{   to argc-1th argument in s }
+{   uses the function paramstr(n), which returns the nth argument }
 function getarg (n : integer; var s : string; maxs : integer) : boolean;
 var
     arg : array [1..MAXSTR] of char;

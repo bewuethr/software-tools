@@ -130,7 +130,7 @@ begin
         i := 1;
         while (getarg(i, argstr, MAXSTR)) do begin
             k := 1;
-            tabstops[ctoi(argstr,k)] := true;
+            tabstops[ctoi(argstr, k)] := true;
             i := i + 1
         end
     end

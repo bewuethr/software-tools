@@ -122,7 +122,7 @@ const
     TABSPACE = 4;   { 4 spaces per tab }
 var
     i, k : integer;
-    argstr: string;
+    argstr : string;
 begin
     if (nargs() > 0) then begin
         for i := 1 to MAXLINE do

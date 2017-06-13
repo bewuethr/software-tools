@@ -1,0 +1,93 @@
+.\" ============================================================================
+.TH TRANSLIT 1
+.\" ============================================================================
+.SH NAME
+translit \(em transliterate characters
+.\" ============================================================================
+.SH SYNOPSIS
+.SY translit
+.RB [ ^ ] \fIsrc\fP
+.RI [ dest ]
+.YS
+.\" ============================================================================
+.SH DESCRIPTION
+.B translit
+maps its input, on a character by character basis, and writes the translated
+version to its output.
+In the simplest case, each character in the argument
+.I src
+is translated to the corresponding character in the argument
+.IR dest ;
+all other characters are copied as is.
+Both
+.I src
+and
+.I dest
+may contain substrings of the form
+.IB c1 \- c2 \fR.\fP
+.I c1
+and
+.I c2
+must both be digits, or both be letters of the same case.
+.P
+If
+.I dest
+is absent, all characters represented by
+.I src
+are deleted.
+Otherwise, if
+.I dest
+is shorter than
+.IR src ,
+all characters in
+.I src
+that would map to or beyond the last character in
+.I dest
+are mapped to the last character in
+.IR dest ;
+moreover adjacent instances of such characters in the input are represented in
+the output by a single instance of the last character in
+.IR dest .
+Thus
+.RS 4
+.nf
+
+translit 0-9 9
+
+.fi
+.RE
+converts each string of digits to the single digit 9.
+.P
+Finally, if
+.I src
+is preceded by a 
+.BR ^ ,
+then
+.I all but
+the characters represented by
+.I src
+are taken as the source string; i.e., they are all deleted if
+.I dest
+is absent, or they are all collapsed if the last character in
+.I dest
+is present.
+.\" ============================================================================
+.SH EXAMPLE
+To convert upper case to lower:
+.RS 4
+.nf
+
+.B translit A-Z a-z
+
+.fi
+.RE
+To discard punctuation and isolate words by spaces on each line:
+.RS 4
+.nf
+
+.B translit ^a-zA-Z@n \(dq \(dq
+.B This is a simple-minded test, i.e., a test of translit.
+This is a simple minded test i e a test of translit
+.fi
+.RE
+.\" ============================================================================

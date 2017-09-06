@@ -120,6 +120,17 @@ begin
     end
 end;
 
+{ length -- compute length of string }
+function length (var s : string) : integer;
+var
+    n : integer;
+begin
+    n := 1;
+    while (s[n] <> ENDSTR) do
+        n := n + 1;
+    length := n - 1
+end;
+
 { translit -- map characters }
 procedure translit;
 const
